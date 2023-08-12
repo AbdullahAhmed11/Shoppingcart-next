@@ -69,7 +69,7 @@ function NavBar() {
                                 </a>
                             ) : (
 
-                                <a className="text-xl font-semibold text-gray-900 leading-6">
+                                <a className="text-xl font-semibold text-gray-900 leading-6" href="/login">
                                     Log in <span aria-hidden="true">&rarr; </span>
                                 </a>
                             )
