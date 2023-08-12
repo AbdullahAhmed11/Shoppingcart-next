@@ -12,9 +12,11 @@ import {
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 function NavBar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const { data: session } = useSession()
 
     const NAV_LINKS = [
         {
@@ -60,9 +62,18 @@ function NavBar() {
                         }
                     </div>
                     <div className="hidden lg:flex items-center  gap-3">
-                        <a className="text-xl font-semibold text-gray-900 leading-6">
-                            Log in <span aria-hidden="true">&rarr; </span>
-                        </a>
+                        {
+                            session?.user?.email ? (
+                                <a onClick={() => signOut()} className="text-xl font-semibold text-gray-900 leading-6">
+                                    Log out <span aria-hidden="true">&rarr; </span>
+                                </a>
+                            ) : (
+
+                                <a className="text-xl font-semibold text-gray-900 leading-6">
+                                    Log in <span aria-hidden="true">&rarr; </span>
+                                </a>
+                            )
+                        }
                         <div className="flex items-center gap-2">
                             <a className="text-xl font-semibold text-gray-900 leading-6">
                                 Cart
