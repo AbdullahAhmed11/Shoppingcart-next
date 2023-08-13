@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Image from "next/image";
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
@@ -11,12 +11,32 @@ import {
     SquaresPlusIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
+import {
+    ChevronDownIcon,
+    PhoneIcon,
+    PlayCircleIcon,
+    MoonIcon,
+    SunIcon,
+} from '@heroicons/react/20/solid'
 import { useSession, signIn, signOut } from "next-auth/react"
 
 function NavBar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [theme, setTheme] = useState("light")
     const { data: session } = useSession()
+
+    useEffect(() => {
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark")
+        } else {
+            document.documentElement.classList.remove("dark")
+        }
+    }, [theme])
+
+    const handleThemeSwitch = () => {
+        setTheme(theme === "dark" ? "light" : "dark")
+    }
+
 
     const NAV_LINKS = [
         {
@@ -36,12 +56,12 @@ function NavBar() {
 
     return (
         <>
-            <header className="bg-white">
+            <header className="bg-white dark:bg-black ">
                 <nav className="flex items-center justify-between p-6 mx-auto shadow-md">
                     <div>
                         <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
                     </div>
-                    <div className="flex lg:hidden">
+                    <div className="flex lg:hidden gap-2">
                         <button
                             type="button"
                             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -50,36 +70,56 @@ function NavBar() {
                             <span className="sr-only">Open main menu</span>
                             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                         </button>
+                        <div>
+                            {
+                                theme === "dark" ? (
+                                    <SunIcon className="w-6 h-6 text-white" onClick={handleThemeSwitch} />
+                                ) : (
+
+                                    <MoonIcon className="w-6 h-6" onClick={handleThemeSwitch} />
+                                )
+                            }
+                        </div>
                     </div>
 
                     <div className=" lg:flex items-center gap-3 hidden">
                         {
                             NAV_LINKS.map((link) => (
-                                <a className="text-xl text-gray-900 font-bold" key={link.href} href={link.href}>
+                                <a className="text-xl text-gray-900 font-bold dark:text-white" key={link.href} href={link.href}>
                                     {link.label}
                                 </a>
                             ))
                         }
                     </div>
-                    <div className="hidden lg:flex items-center  gap-3">
+                    <div className="hidden lg:flex items-center  gap-3 text-gray-900 dark:text-white">
                         {
                             session?.user?.email ? (
-                                <a onClick={() => signOut()} className="text-xl font-semibold text-gray-900 leading-6">
+                                <a onClick={() => signOut()} className="text-xl font-semibold leading-6">
                                     Log out <span aria-hidden="true">&rarr; </span>
                                 </a>
                             ) : (
 
-                                <a className="text-xl font-semibold text-gray-900 leading-6" href="/login">
+                                <a className="text-xl font-semibold leading-6" href="/login">
                                     Log in <span aria-hidden="true">&rarr; </span>
                                 </a>
                             )
                         }
                         <div className="flex items-center gap-2">
-                            <a className="text-xl font-semibold text-gray-900 leading-6">
+                            <a className="text-xl font-semibold leading-6">
                                 Cart
                             </a>
                             <span aria-hidden="true" ><ShoppingBagIcon className="w-6 h-6" /></span>
-                            <span className="w-4 h-4 bg-black rounded-full absolute top-6 right-4 flex items-center justify-center text-white">0</span>
+                            <span className="w-4 h-4 bg-black rounded-full absolute top-6 right-14 flex items-center justify-center text-white">0</span>
+                        </div>
+                        <div>
+                            {
+                                theme === "dark" ? (
+                                    <SunIcon className="w-6 h-6 text-white" onClick={handleThemeSwitch} />
+                                ) : (
+
+                                    <MoonIcon className="w-6 h-6" onClick={handleThemeSwitch} />
+                                )
+                            }
                         </div>
                     </div>
                 </nav>
@@ -106,6 +146,7 @@ function NavBar() {
                                 <span className="sr-only">Close menu</span>
                                 <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                             </button>
+
                         </div>
                         <div className="mt-6 flow-root">
                             <div className="-my-6 divide-y divide-gray-500/10">
@@ -126,7 +167,7 @@ function NavBar() {
                                 </div>
                                 <div className="py-6">
                                     <a
-                                        href="#"
+                                        href="/login"
                                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                     >
                                         Log in
