@@ -32,6 +32,7 @@ const config: Config = {
       },
       colors: {
         'header-bacg': '#cbd5e1',
+        "secondry": "#b6bbb6"
       }
     },
   },
