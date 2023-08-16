@@ -19,11 +19,19 @@ import {
     SunIcon,
 } from '@heroicons/react/20/solid'
 import { useSession, signIn, signOut } from "next-auth/react"
+import { useShoppingCart } from "@/lib/context/shopping-cart";
 
 function NavBar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [theme, setTheme] = useState("light")
     const { data: session } = useSession()
+    const [totalProducts, setTotalProducts] = useState(0)
+    const { cartProducts } = useShoppingCart()
+
+
+    useEffect(() => {
+        setTotalProducts(cartProducts);
+    }, [cartProducts]);
 
     useEffect(() => {
         if (theme === "dark") {
@@ -109,7 +117,7 @@ function NavBar() {
                                 Cart
                             </a>
                             <span aria-hidden="true" ><ShoppingBagIcon className="w-6 h-6" /></span>
-                            <span className="w-4 h-4 bg-black rounded-full absolute top-6 right-14 flex items-center justify-center text-white">0</span>
+                            <span className="w-4 h-4 bg-black rounded-full absolute top-6 right-14 flex items-center justify-center text-white">{totalProducts}</span>
                         </div>
                         <div>
                             {
