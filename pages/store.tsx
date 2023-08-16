@@ -7,7 +7,7 @@ import Layout from "@/components/Layout/Layout";
 import { Aside } from "@/components/Store/Aside";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import { Listing } from "@/components/Store/Listing";
-
+import { MainSeo } from "@/components/Seo/MainSeo";
 type StaticProps = {
     props: {
         allProducts: Products
@@ -32,15 +32,23 @@ function Store({ allProducts }: InferGetServerSidePropsType<typeof getStaticProp
     }, [])
     return (
         <>
-            <Layout>
-                <MaxWidthWrapper>
-                    <div className='flex flex-col items-start gap-6 md:flex-row md:gap-8'>
+            <MainSeo
+                title='Shopping Cart | Store'
+                description='You can find everything you need here.'
+                image='/store.png'
+                url='/store'
+            >
+                <Layout>
+                    <MaxWidthWrapper>
+                        <div className='flex flex-col items-start gap-6 md:flex-row md:gap-8'>
 
-                        <Aside />
-                        <Listing allProducts={allProducts} />
-                    </div>
-                </MaxWidthWrapper>
-            </Layout>
+                            <Aside />
+                            <Listing allProducts={allProducts} />
+                        </div>
+                    </MaxWidthWrapper>
+                </Layout>
+
+            </MainSeo>
         </>
     )
 }
