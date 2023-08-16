@@ -69,15 +69,12 @@ function NavBar() {
                     <div>
                         <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
                     </div>
-                    <div className="flex lg:hidden gap-2">
-                        <button
-                            type="button"
-                            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-                            onClick={() => setMobileMenuOpen(true)}
-                        >
-                            <span className="sr-only">Open main menu</span>
-                            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-                        </button>
+                    <div className="flex lg:hidden gap-3">
+                        <div className="flex items-center gap-2">
+                            <span aria-hidden="true" ><ShoppingBagIcon className="w-6 h-6" /></span>
+                            <span className="w-4 h-4 bg-black rounded-full absolute top-6 right-24 flex items-center justify-center text-white">{totalProducts}</span>
+                        </div>
+
                         <div>
                             {
                                 theme === "dark" ? (
@@ -88,6 +85,15 @@ function NavBar() {
                                 )
                             }
                         </div>
+                        <button
+                            type="button"
+                            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                            onClick={() => setMobileMenuOpen(true)}
+                        >
+                            <span className="sr-only">Open main menu</span>
+                            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                        </button>
+
                     </div>
 
                     <div className=" lg:flex items-center gap-3 hidden">
@@ -134,7 +140,7 @@ function NavBar() {
 
 
 
-                <Dialog as="div" className="lg:hidden " open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+                <Dialog as="div" className="lg:hidden fixed absolute " open={mobileMenuOpen} onClose={setMobileMenuOpen}>
                     <div className="fixed inset-0 z-10" />
                     <Dialog.Panel className="  fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                         <div className="flex items-center justify-between ">
