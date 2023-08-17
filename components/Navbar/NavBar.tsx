@@ -20,6 +20,7 @@ import {
 } from '@heroicons/react/20/solid'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useShoppingCart } from "@/lib/context/shopping-cart";
+import Link from "next/link"
 
 function NavBar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -118,13 +119,15 @@ function NavBar() {
                                 </a>
                             )
                         }
-                        <div className="flex items-center gap-2">
-                            <a className="text-xl font-semibold leading-6">
-                                Cart
-                            </a>
-                            <span aria-hidden="true" ><ShoppingBagIcon className="w-6 h-6" /></span>
-                            <span className="w-4 h-4 bg-black rounded-full absolute top-6 right-14 flex items-center justify-center text-white">{totalProducts}</span>
-                        </div>
+                        <Link passHref href="/cart">
+                            <div className="flex items-center gap-2">
+                                <span className="text-xl font-semibold leading-6">
+                                    Cart
+                                </span>
+                                <span aria-hidden="true" ><ShoppingBagIcon className="w-6 h-6" /></span>
+                                <span className="w-4 h-4 bg-black dark:bg-white dark:text-black rounded-full absolute top-6 right-14 flex items-center justify-center text-white">{totalProducts}</span>
+                            </div>
+                        </Link>
                         <div>
                             {
                                 theme === "dark" ? (
