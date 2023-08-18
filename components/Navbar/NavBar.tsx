@@ -73,8 +73,8 @@ function NavBar() {
                     <div className="flex lg:hidden gap-3">
                         <Link passHref href="/cart">
                             <div className="flex items-center gap-2">
-                                <span aria-hidden="true" ><ShoppingBagIcon className="w-6 h-6" /></span>
-                                <span className="w-4 h-4 bg-black dark:bg-white rounded-full absolute top-6 right-24 flex items-center justify-center text-white">{totalProducts}</span>
+                                <span aria-hidden="true" ><ShoppingBagIcon className="w-6 h-6 dark:text-white" /></span>
+                                <span className="w-4 h-4 bg-black dark:bg-white dark:text-black rounded-full absolute top-6 right-24 flex items-center justify-center text-white">{totalProducts}</span>
                             </div>
                         </Link>
 
