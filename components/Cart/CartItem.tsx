@@ -25,7 +25,7 @@ export default function CartITem({
 
     return (
         <>
-            <div className="flex mt-10 flex-grow border-4 md:w-[480px] w-[400px]  rounded-lg items-center gap-2 justify-arround">
+            <div className="flex mt-10 flex-grow border-4 md:w-[480px] w-[380px]  rounded-lg items-center gap-2 justify-arround">
                 <div className="basis-1/3">
                     <img src={image} className="h-full object-contain  w-[108px]  shrink-0 shrink-0 bg-white" />
                 </div>

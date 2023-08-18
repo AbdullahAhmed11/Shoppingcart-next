@@ -71,10 +71,12 @@ function NavBar() {
                         <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
                     </div>
                     <div className="flex lg:hidden gap-3">
-                        <div className="flex items-center gap-2">
-                            <span aria-hidden="true" ><ShoppingBagIcon className="w-6 h-6" /></span>
-                            <span className="w-6 h-6 bg-black rounded-full absolute top-6 right-24 flex items-center justify-center text-white">{totalProducts}</span>
-                        </div>
+                        <Link passHref href="/cart">
+                            <div className="flex items-center gap-2">
+                                <span aria-hidden="true" ><ShoppingBagIcon className="w-6 h-6" /></span>
+                                <span className="w-4 h-4 bg-black rounded-full absolute top-6 right-24 flex items-center justify-center text-white">{totalProducts}</span>
+                            </div>
+                        </Link>
 
                         <div>
                             {

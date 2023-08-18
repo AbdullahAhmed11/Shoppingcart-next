@@ -29,7 +29,7 @@ export default function Cart() {
                                 Clear
                             </button>
                         </div>
-                        <div className="mt-20">
+                        <div className="mt-20 flex items-center justify-center flex-col">
                             {
                                 currentCart.map((cartProduct, index) => (
 
