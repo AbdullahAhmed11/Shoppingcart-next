@@ -10,7 +10,7 @@ export default function Cart() {
 
     const cartLength = currentCart.length;
     return (
-        <>
+        <div className="overflow-hidden">
             <Layout>
                 <MaxWidthWrapper>
 
@@ -43,6 +43,6 @@ export default function Cart() {
                     </div>
                 </MaxWidthWrapper>
             </Layout>
-        </>
+        </div>
     )
 }
