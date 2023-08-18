@@ -17,6 +17,10 @@ type ShoppingCartContext = {
         productId: number,
         type?: 'increment' | 'decrement'
     ) => (e: ChangeEvent<HTMLInputElement>) => void
+    increaseCartQuantity: (productId: number) => void
+    decreaseCartQuantity: (id: number) => void
+
+
 };
 
 const ShoppingCartContext = createContext<ShoppingCartContext | null>(null);
@@ -70,6 +74,24 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
                 );
             };
 
+    const increaseCartQuantity = (productId: number) => {
+        setCurrentCart(currentCart.map((cartProduct) =>
+            cartProduct.id === productId ? {
+                ...cartProduct, quantity: cartProduct.quantity + 1
+            } : cartProduct
+        )
+        )
+    }
+
+    const decreaseCartQuantity = (productId: number) => {
+        setCurrentCart(currentCart.map((cartProduct) =>
+            cartProduct.id === productId ? {
+                ...cartProduct, quantity: cartProduct.quantity - 1
+            } : cartProduct
+        )
+        )
+    }
+
     const clearCart = (): void => setCurrentCart([])
 
     const [cartProducts, totalPrice] = currentCart.reduce(
@@ -88,7 +110,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         clearCart,
         addProduct,
         deleteProduct,
-        handleProductQuantity
+        handleProductQuantity,
+        increaseCartQuantity,
+        decreaseCartQuantity
     };
 
 

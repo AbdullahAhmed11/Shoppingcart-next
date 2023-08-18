@@ -5,6 +5,10 @@ import { useRouter } from "next/router";
 import { QueryType } from "./Aside";
 import { filterQuery } from "@/lib/query";
 import MaxWidthWrapper from "../MaxWidthWrapper/MaxWidthWrapper";
+import { motion } from "framer-motion"
+import { setTransition } from "@/lib/transition";
+
+
 type ListingProps = {
     allProducts: Products
 }
@@ -49,20 +53,25 @@ export function Listing({ allProducts }: ListingProps) {
 
         <>
             <MaxWidthWrapper>
+                <motion.div
+                    {...setTransition({ direction: 'left' })}
 
-                <div className="grid md:grid-cols-2 grid-cols-1 gap-4 md:ml-20 ">
-                    {
-                        isLoading ? (
-                            <>
-                                <p>Loading...</p>
-                            </>
-                        ) : (
-                            filteredProducts.map((productData) => (
-                                <ProductCard productData={productData} key={productData.id} />
-                            ))
-                        )
-                    }
-                </div >
+                >
+                    <div className="grid md:grid-cols-2 grid-cols-1 gap-4 md:ml-20 ">
+                        {
+                            isLoading ? (
+                                <>
+                                    <p>Loading...</p>
+                                </>
+                            ) : (
+                                filteredProducts.map((productData) => (
+                                    <ProductCard productData={productData} key={productData.id} />
+                                ))
+                            )
+                        }
+                    </div >
+
+                </motion.div>
             </MaxWidthWrapper>
         </>
     )

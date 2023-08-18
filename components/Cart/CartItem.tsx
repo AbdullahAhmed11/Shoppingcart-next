@@ -9,6 +9,7 @@ type CartItemProps = {
     price: number;
     quantity: number;
 };
+
 export default function CartITem({
     id,
     title,
@@ -18,11 +19,13 @@ export default function CartITem({
 }: CartItemProps) {
 
 
-    const { deleteProduct, handleProductQuantity } = useShoppingCart();
+    const { deleteProduct, decreaseCartQuantity, increaseCartQuantity } = useShoppingCart();
+
+
 
     return (
         <>
-            <div className="flex mt-10 flex-grow border-4 w-[480px] h-40 rounded-lg items-center gap-2 justify-arround">
+            <div className="flex mt-10 flex-grow border-4 md:w-[480px] w-[400px]  rounded-lg items-center gap-2 justify-arround">
                 <div className="basis-1/3">
                     <img src={image} className="h-full object-contain  w-[108px]  shrink-0 shrink-0 bg-white" />
                 </div>
@@ -37,12 +40,14 @@ export default function CartITem({
                 <div className="dark:text-white h-full flex flex-grow flex-col gap-3 basis-1/3   border-2">
                     <button
                         className="w-full basis-1/3 w-10 h-2 mt-3 p-3 border-b items-center flex justify-center"
-                        onClick={handleProductQuantity(id, 'increment')}
+                        onClick={() => increaseCartQuantity(id)}
 
-                    ><MdAdd /></button>
+                    >
+                        <MdAdd />
+                    </button>
                     <button
                         className="w-full basis-1/3 w-10 h-2 mt-3 p-3 border-b items-center flex justify-center"
-                        onClick={handleProductQuantity(id, 'decrement')}
+                        onClick={() => decreaseCartQuantity(id)}
                     ><MdRemove /></button>
                     <button
                         className="w-full basis-1/3 w-10 h-2 mt-3 p-3 border-b items-center flex justify-center"
